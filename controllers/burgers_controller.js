@@ -1,43 +1,44 @@
 var express = require('express');
-var models = require('../models/burger');
+var router = express.Router();
+var burger = require('../models/burger');
 
-$(function() {
-  $(".devourit").on("click", function(event) {
-    var id = $(this).data("id");
-
-    // Send the Update request.
-    $.ajax("/api/burgers/" + id, {
-      type: "PUT"
-    }).then(
-      function() {
-        console.log("debouret it ", id);
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
-  });
-
- 
-  $(".update-burger").on("submit", function(event) {
-    // Make sure to preventDefault on a submit event.
-    event.preventDefault();
-
-    var updatedBurger = {
-      burger_name: $("#burger").val().trim(),
+// Create all our routes and set up logic within those routes where required.
+router.get("/", function(req, res) {
+  burger.all(function(data) {
+    var hbsObject = {
+      burger: data
     };
-
-    var id = $(this).data("id");
-
-    // Send the POST request.
-    $.ajax("/api/quotes/" + id, {
-      type: "PUT",
-      data: updatedQuote
-    }).then(
-      function() {
-        console.log("updated burger");
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
+    console.log(hbsObject);
+    res.render("index", hbsObject);
   });
 });
+
+router.post("/api/burgers", function(req, res) {
+  burger.create(["burgerName"], [req.body.name], function(result) {
+    // Send back the ID of the new quote
+    res.json({ id: result.insertId });
+  });
+});
+
+router.put("/api/burgers/:id", function(req, res) {
+  var condition = "id = " + req.params.id;
+
+  console.log("condition", condition);
+
+  cat.update(
+    {
+      id: req.params.id
+    },
+    function(result) {
+      if (result.changedRows === 0) {
+        // If no rows were changed, then the ID must not exist, so 404
+        return res.status(404).end();
+      }
+      res.status(200).end();
+
+    }
+  );
+});
+
+// Export routes for server.js to use.
+module.exports = router;

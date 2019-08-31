@@ -22,7 +22,8 @@ var orm = {
     connection.query(queryString,[tableInput, inputValue, id], function(err,data){
       if (err) throw err;
       cb(data);
-  }
+  })
+}
 }
 
 module.exports = orm;
