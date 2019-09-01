@@ -5,23 +5,17 @@ var burger = {
     orm.all("burgers", function(result) {
       cb(result);
   })
-},
-allDevourit: function(cb) {
-  orm.allDevourit("burgers", "true", function(result) {
+},  
+update: function(cols, vals,cb) {
+  orm.update("burgers", cols, vals, function(result) {
     cb(result) 
 })
 },
-update: function(id,cb) {
-  orm.update("burgers", "true", id, function(result) {
+create: function(objColVals, condition, cb) {
+  orm.insert("burgers", objColVals, condition, function(result) {
     cb(result) 
 })
-},
-
-create: function(burgerName, cb) {
-  orm.insert("burgers", burgerName, "false", function(result) {
-    cb(result) 
-})
-},
+}
 
 };
 
