@@ -5,7 +5,7 @@ $(function() {
    // var newSleep = $(this).data("newsleep");
 
     var newburgerState = {
-      devoured: "false"
+      devoured: "1"
     };
 
     // Send the PUT request.
@@ -26,12 +26,13 @@ $(function() {
     event.preventDefault();
     console.log('here')
     var newBurger = {
-      name: $("#ca").val().trim(),
-     
+      burger_name: $("#ca").val().trim(),
+      devoured: "0"
     };
+    console.log(newBurger)
 
     // Send the POST request.S
-    $.ajax("/api/burgers", {
+    $.ajax("/api/burgers/", {
       type: "POST",
       data: newBurger
     }).then(

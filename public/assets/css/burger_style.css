@@ -18,3 +18,10 @@ input.new-item:focus {
   width: 100%;
 }
 
+.burger-list {
+  list-style-type: none;
+}
+header{
+  background-image: url("../img/burger.jpg")
+}
+
