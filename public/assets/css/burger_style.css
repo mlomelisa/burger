@@ -21,7 +21,22 @@ input.new-item:focus {
 .burger-list {
   list-style-type: none;
 }
-header{
-  background-image: url("../img/burger.jpg")
+
+header {
+  margin-top: 25px;
+  background-color: black;
 }
 
+img {
+  
+  width: 50%;
+}
+
+.container-fluid, body {
+  background-color: black;
+}
+
+h2, h1, li,label, p {
+  color: white;
+  
+}
